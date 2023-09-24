@@ -19,7 +19,6 @@
 
 <h1 id="timer"></h1>
 
-<audio id="endSound" src="alarm.mp3" preload="auto"></audio>
 
 <script>
     var time = prompt("Inserisci il tempo in secondi");
@@ -32,7 +31,10 @@
         timerElement.innerHTML = time;
         if(time <= 0) {
             clearInterval(timer);
-            endSound.play();
+            <audio controls preload="auto">
+    <source src="alarm.mp3" type="audio/mpeg" />
+    This text displays if the audio tag isn't supported.
+</audio>
             alert("Tempo scaduto!");
         }
     }, 1000);
