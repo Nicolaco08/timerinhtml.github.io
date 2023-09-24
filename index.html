@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.timer {
+  text-align: center;
+  font-size: 48px;
+  font-family: Arial, sans-serif;
+  margin-top: 100px;
+}
+</style>
+</head>
+<body>
+<div class="timer" id="timer"></div>
+
+<script>
+function startTimer() {
+  var hours = parseInt(document.getElementById("hours").value);
+  var minutes = parseInt(document.getElementById("minutes").value);
+  var seconds = parseInt(document.getElementById("seconds").value);
+
+  var totalSeconds = hours * 3600 + minutes * 60 + seconds;
+
+  var timer = document.getElementById("timer");
+  timer.innerHTML = formatTime(totalSeconds);
+
+  var interval = setInterval(function() {
+    totalSeconds--;
+    timer.innerHTML = formatTime(totalSeconds);
+
+    if (totalSeconds <= 0) {
+      clearInterval(interval);
+      timer.innerHTML = "Time's up!";
+      // Play sound here
+      <audio controls>
+  <source src="alarm.mp3" type="audio/mpeg">
+  Il tuo browser non supporta l'elemento audio.
+</audio>
+
+    }
+  }, 1000);
+}
+
+function formatTime(totalSeconds) {
+  var hours = Math.floor(totalSeconds / 3600);
+  var minutes = Math.floor((totalSeconds - hours * 3600) / 60);
+  var seconds = totalSeconds - hours * 3600 - minutes * 60;
+
+  return (
+    (hours < 10 ? "0" + hours : hours) +
+    ":" +
+    (minutes < 10 ? "0" + minutes : minutes) +
+    ":" +
+    (seconds < 10 ? "0" + seconds : seconds)
+  );
+}
+</script>
+
+<h2>Timer</h2>
+<label for="hours">Hours:</label>
+<input type="number" id="hours" min="0" max="23" value="0">
+<label for="minutes">Minutes:</label>
+<input type="number" id="minutes" min="0" max="59" value="0">
+<label for="seconds">Seconds:</label>
+<input type="number" id="seconds" min="0" max="59" value="0">
+<button onclick="startTimer()">Start</button>
+</body>
+</html>
